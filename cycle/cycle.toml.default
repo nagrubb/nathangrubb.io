@@ -1,0 +1,7 @@
+title = "Cycle API Configuration"
+
+[goal]
+year=<goal>
+
+[strava]
+access_token=<access_token>

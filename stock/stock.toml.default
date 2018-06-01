@@ -1,0 +1,4 @@
+title = "Stock API Configuration"
+
+[api_key]
+alpha_vantage=<api_key>

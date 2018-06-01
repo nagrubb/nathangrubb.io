@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from myproject import application
+from stock import application
 
 if __name__ == "__main__":
     application.run()

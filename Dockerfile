@@ -4,13 +4,13 @@ MAINTAINER Nathan Grubb
 RUN apt update -y && apt upgrade -y
 RUN apt install -y systemd python3 python3-pip nginx
 RUN apt install -y lsb-core vim
-RUN pip3 install uwsgi flask
+RUN pip3 install uwsgi flask stravalib alpha-vantage Flask-Cors toml
 
 COPY init.d/uwsgi /etc/init.d/
 RUN chmod +x /etc/init.d/uwsgi
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY vassals/myproject.ini /etc/uwsgi/vassals/
+COPY vassals/* /etc/uwsgi/vassals/
 
 CMD service nginx start
 
@@ -21,7 +21,8 @@ WORKDIR /home/webuser
 
 # Copy web applications
 COPY --chown=webuser html /home/webuser/html
-COPY --chown=webuser myproject /home/webuser/myproject
+COPY --chown=webuser cycle /home/webuser/cycle
+COPY --chown=webuser stock /home/webuser/stock
 
 USER root
 ENTRYPOINT service nginx start && service uwsgi start && bash
