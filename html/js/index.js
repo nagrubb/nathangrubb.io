@@ -224,7 +224,7 @@
     }
 
     $.ajax({
-      url: "http://localhost:5001/cycle",
+      url: "cycle",
       crossDomain: true,
       dataType: 'json',
       headers: {"Access-Control-Allow-Origin": "*"},
@@ -237,7 +237,7 @@
   }
 
   function fetchStockPrice(quote) {
-    var url = `http://localhost:5001/stock/${quote}`;
+    var url = `stock/${quote}`;
     //var selector = `#${quote}`;
     var selector = `[id=${quote}]`;
 
@@ -270,6 +270,6 @@
       fetchCyclingGoalData();
       fetchStockPrice("aaxn");
       fetchStockPrice("msft");
-      fetchStockPrice("bbry");
+      fetchStockPrice("bb");
   });
 })();
