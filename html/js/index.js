@@ -225,9 +225,7 @@
 
     $.ajax({
       url: "cycle",
-      crossDomain: true,
       dataType: 'json',
-      headers: {"Access-Control-Allow-Origin": "*"},
       success: function(result) {
         fillFunction(result);
       },
@@ -238,7 +236,6 @@
 
   function fetchStockPrice(quote) {
     var url = `stock/${quote}`;
-    //var selector = `#${quote}`;
     var selector = `[id=${quote}]`;
 
     var fillFunction = function(selector, price) {
@@ -248,9 +245,7 @@
 
     $.ajax({
       url: url,
-      crossDomain: true,
       dataType: 'json',
-      headers: {"Access-Control-Allow-Origin": "*"},
       success: function(result) {
         fillFunction(selector, `$${result.closing_price}`);
       },
