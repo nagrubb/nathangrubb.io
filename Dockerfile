@@ -9,7 +9,7 @@ RUN pip3 install uwsgi flask stravalib alpha-vantage Flask-Cors toml
 COPY init.d/uwsgi /etc/init.d/
 RUN chmod +x /etc/init.d/uwsgi
 
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx /etc/nginx
 COPY vassals/* /etc/uwsgi/vassals/
 
 CMD service nginx start
