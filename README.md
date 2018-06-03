@@ -1,9 +1,36 @@
 # Containerized Website
 
-# How build & run
-docker build -t test . && docker run -p 5001:5001 -ti test
+# Step 1: Clone
+```
+git clone <this-repo>
+```
 
-# Things left to do
-1. Move nathangrubb.io certificates and register with nginx
-2. Commit
-3. Deploy!
+# Step 2: Configure
+```
+cp stock/stock.toml.default stock/stock.toml
+vi stock.toml #configure as needed
+cp cycle/cycle.toml.default cycle/cycle.toml
+vi cycle.toml #configure as needed
+```
+
+# Step 3: Add public key infrastructure for TLS
+```
+cp <cert> nginx/pki
+cp <private-key> nginx/pki
+cp <dhparams> nginx/pki
+```
+
+# Step 4: Create Container
+```
+docker build -t website .
+```
+
+# Step 5: Run Container
+```
+docker run -p 80:80 -p 443:443 -ti website
+```
+
+# Step 6: Test
+```
+curl <ip-address>
+```

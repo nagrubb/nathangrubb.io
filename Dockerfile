@@ -4,12 +4,12 @@ MAINTAINER Nathan Grubb
 RUN apt update -y && apt upgrade -y
 RUN apt install -y systemd python3 python3-pip nginx
 RUN apt install -y lsb-core vim
-RUN pip3 install uwsgi flask stravalib alpha-vantage Flask-Cors toml
+RUN pip3 install uwsgi flask stravalib alpha-vantage toml
 
 COPY init.d/uwsgi /etc/init.d/
 RUN chmod +x /etc/init.d/uwsgi
 
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx /etc/nginx
 COPY vassals/* /etc/uwsgi/vassals/
 
 CMD service nginx start
