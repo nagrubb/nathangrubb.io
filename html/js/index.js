@@ -208,12 +208,16 @@
       var goal = rideData.goal;
       var totalPercent = Math.round(ytd / goal * 100);
       var ytdGoal = Math.round(goal / calculateDaysInAYear() * calculateDayOfYear());
+      var ytdExpectedPacePercentage = Math.round(ytdGoal / goal * 100);
       var onTrackPercent = Math.round(ytd / ytdGoal * 100);
 
       var content = `
       <p>Year End Goal (${goal} miles)</p>
       <div class="w3-light-grey w3-round-xlarge" style="height:24px">
-        <div class="w3-round-xlarge w3-center w3-blue" style="height:24px;width:${totalPercent}%">${totalPercent}%</div>
+        <div class="pace-wrapper">
+          <div class="w3-round-xlarge w3-center w3-blue" style="height:24px;width:${totalPercent}%">${totalPercent}%</div>
+          <div class="pace-line" style="width:${ytdExpectedPacePercentage}%"></div>
+        </div>
       </div>
       <p>Pace (${ytdGoal - ytd} miles behind pace)</p>
       <div class="w3-light-grey w3-round-xlarge" style="height:24px">

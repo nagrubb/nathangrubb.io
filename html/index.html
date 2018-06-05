@@ -14,17 +14,48 @@
 <script src="js/index.js"></script>
 
 <style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
-.strava-badge- { display: inline-block; height: 24px; }
-.strava-badge- img { visibility: hidden; height: 24px; }
-.strava-badge-:hover { background-position: 0 -37px; }
-.strava-badge-follow { height: 24px; width: 24px; background: url(images/strava.png) no-repeat 0 0; }
+html,body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Roboto", sans-serif
+}
+
+.strava-badge- {
+  display: inline-block;
+  height: 24px;
+}
+
+.strava-badge- img {
+  visibility: hidden;
+  height: 24px;
+}
+
+.strava-badge-:hover {
+  background-position: 0 -37px;
+}
+
+.strava-badge-follow {
+  height: 24px;
+  width: 24px;
+  background: url(//badges.strava.com/echelon-sprite-24.png) no-repeat 0 0;
+}
+
+.pace-wrapper {
+  position: relative;
+}
+
+.pace-line {
+  border-right: 1px solid black;
+  position: absolute;
+  top: -8px;
+  right: 0;
+  left: 0;
+  height: 40px;
+}
+
 </style>
 <body class="w3-light-grey">
 <div id="console"></div>
 <!-- Page Container -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
-
   <!-- The Grid -->
   <div class="w3-row-padding">
 
@@ -113,7 +144,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <p class="w3-large">
             <b>
               <i class="fa fa-bicycle fa-fw w3-margin-right w3-text-blue"></i>Cycling Goals
-              <a href="http://strava.com/athletes/22005749/badge" class="strava-badge- strava-badge-follow w3-margin-left" target="_blank"><img src="images/strava.png" alt="Strava" /></a>
+              <a href="https://strava.com/athletes/22005749/badge" class="w3-margin-left strava-badge- strava-badge-follow" target="_blank"><img src="//badges.strava.com/echelon-sprite-24.png" alt="Strava" /></a>
             </b>
           </p>
           <div id="CyclingGoalContent">
