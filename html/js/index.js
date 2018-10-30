@@ -202,26 +202,69 @@
     return new Date().getFullYear() % 4 == 0 ? 366 : 365;
   }
 
+  function invertPercentage(percentage) {
+    return (1.0 / (percentage / 100.0) * 100.0);
+  }
+
   function fetchCyclingGoalData(rideData){
     var fillFunction = function(rideData) {
       var ytd = Math.round(rideData.ytd);
       var goal = rideData.goal;
       var totalPercent = Math.round(ytd / goal * 100);
+      var totalBarPercent = totalPercent;
       var ytdGoal = Math.round(goal / calculateDaysInAYear() * calculateDayOfYear());
       var ytdExpectedPacePercentage = Math.round(ytdGoal / goal * 100);
       var onTrackPercent = Math.round(ytd / ytdGoal * 100);
+      var paceString = null;
+      var goalBarRightColor = 'w3-blue';
+      var goalBarLeftColor = 'w3-light-grey';
+      var paceBarRightColor = 'w3-blue';
+      var paceBarLeftColor = 'w3-light-grey'
+
+      if (ytd < ytdGoal) {
+        paceString = `${ytdGoal - ytd} miles behind`;
+      } else if (ytd > ytdGoal) {
+        paceString = `${ytd - ytdGoal} miles ahead`;
+      } else {
+        paceString = "on pace";
+      }
+
+      if (onTrackPercent > 100) {
+        //we are ahead of pace, so switch up the UI.
+        //This is a little hacky considering onTrackPercent now
+        //represents the pace's percentage of the total. A
+        //better way to do this would actually be to use a different UI
+        //component or even render the UI on the server. For now, this
+        //at least makes the website look better. Will refactor
+        //as this website gets more complicated.
+        onTrackPercent = invertPercentage(onTrackPercent);
+        paceBarRightColor = 'w3-light-grey';
+        paceBarLeftColor = 'w3-blue';
+      }
+
+      //Again, a bit hacky and this could be refactored as it's the same logic
+      //as above.
+      if (totalBarPercent > 100) {
+        totalBarPercent = invertPercentage(totalBarPercent);
+        goalBarRightColor = 'w3-light-grey';
+        goalBarLeftColor = 'w3-blue';
+      }
 
       var content = `
       <p>Year End Goal (${goal} miles)</p>
-      <div class="w3-light-grey w3-round-xlarge" style="height:24px">
+      <div class="${goalBarLeftColor} w3-round-xlarge" style="height:24px">
         <div class="pace-wrapper">
-          <div class="w3-round-xlarge w3-center w3-blue" style="height:24px;width:${totalPercent}%">${totalPercent}%</div>
-          <div class="pace-line" style="width:${ytdExpectedPacePercentage}%"></div>
+          <div class="w3-round-xlarge w3-center ${goalBarRightColor}" style="height:24px;width:${totalBarPercent}%"></div>
+          <div class="pace-line w3-hide" style="width:${ytdExpectedPacePercentage}%"></div>
+          <div class="pace-percentage w3-center">${totalPercent}%</div>
         </div>
       </div>
-      <p>Pace (${ytdGoal - ytd} miles behind pace)</p>
-      <div class="w3-light-grey w3-round-xlarge" style="height:24px">
-        <div class="w3-round-xlarge w3-center w3-blue" style="height:24px;width:${onTrackPercent}%">${ytd} mi / ${ytdGoal} mi</div>
+      <p>Pace (${paceString})</p>
+      <div class="${paceBarLeftColor} w3-round-xlarge" style="height:24px">
+        <div class="pace-wrapper">
+          <div class="w3-round-xlarge w3-center ${paceBarRightColor}" style="height:24px;width:${onTrackPercent}%"></div>
+          <div class="pace-percentage w3-center">${ytd} mi / ${ytdGoal} mi</div>
+        </div>
       </div>
       `;
       $("#CyclingGoalContent").html(content);
@@ -233,9 +276,17 @@
       success: function(result) {
         fillFunction(result);
       },
-      error: function() { alert('Failed!'); }
+      error: function() {
+        /*
+        //use for testing
+        result = {
+          "ytd"  : 0,
+          "goal" : 2000
+        };
+        fillFunction(result);
+        */
+      }
     });
-
   }
 
   function fetchStockPrice(quote) {
