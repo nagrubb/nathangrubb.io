@@ -321,5 +321,9 @@
       fetchStockPrice("aaxn");
       fetchStockPrice("msft");
       fetchStockPrice("bb");
+
+      $.getJSON('json/visited_countries.geo.json', function(data) {
+        createMap('map', data);
+      });
   });
 })();

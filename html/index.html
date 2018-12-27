@@ -8,11 +8,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="css/jquery.terminal.min.css" />
 <link rel="shortcut icon" href="favicon-suitcase.ico" type="image/x-icon" />
+<link rel="stylesheet" href="css/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="">
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/jquery.mousewheel-min.js"></script>
 <script src="js/jquery.terminal.min.js"></script>
 <script src="js/index.js"></script>
-
+<script src="js/visited_places.js"></script>
+<script src="js/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="></script>
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {
   font-family: "Roboto", sans-serif
@@ -60,6 +62,32 @@ html,body,h1,h2,h3,h4,h5,h6 {
   height: 40px;
 }
 
+.info {
+  padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.leaflet-container {
+  background-color:rgba(0,0,0,0);
+}
+
+#map-wrapper {
+  height:200px;
+}
+
+#map {
+  width:100%;
+  height:100%;
+  position:relative;
+  resize:both;
+}
 </style>
 <body class="w3-light-grey">
 <div id="console"></div>
@@ -175,6 +203,20 @@ html,body,h1,h2,h3,h4,h5,h6 {
             </div>
           </div>
           <br>
+          <hr>
+          <p class="w3-large">
+            <b>
+              <i class="fa fa-map fa-fw w3-margin-right w3-text-blue"></i>Visited Places
+            </b>
+          </p>
+          <div id="CyclingGoalContent">
+            <div class="w3-container w3-center">
+              <div id="map-wrapper">
+              <div id="map"></div>
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </div>
     <!-- End Left Column -->
@@ -187,6 +229,27 @@ html,body,h1,h2,h3,h4,h5,h6 {
         <h2 class="w3-text-grey w3-padding-16">
           <i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Work Experience
         </h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity">
+            <div class="w3-hide-small">
+              <b>Staff Software Engineer / <a href="https:///www.axon.com">Axon (formerly TASER)</a></b>
+              <img src="images/axon.png" style="padding: 5px 5px 5px 14px; width:40px"/>
+              <b id="aaxn"><img src="images/loading.gif" style="padding: 5px 5px 5px 5px;width:5%"/></b>
+            </div>
+            <div class="w3-hide-medium w3-hide-large">
+              <b>Staff Software Engineer</b>
+              <div></div>
+              <b><a href="https:///www.axon.com">Axon (formerly TASER)</a></b>
+              <div></div>
+              <img src="images/axon.png" style="width:20px"/>
+              <b id="aaxn"><img src="images/loading.gif" style="padding: 5px 5px 5px 5px;width:5%"/></b>
+            <div>
+          </h5>
+          <h6 class="w3-text-blue">
+            <i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2019 - <span class="w3-tag w3-blue w3-round">Current</span>
+          </h6>
+          <hr>
+        </div>
         <div class="w3-container">
           <h5 class="w3-opacity">
             <div class="w3-hide-small">
@@ -204,18 +267,20 @@ html,body,h1,h2,h3,h4,h5,h6 {
             <div>
           </h5>
           <h6 class="w3-text-blue">
-            <i class="fa fa-calendar fa-fw w3-margin-right"></i>Feb 2015 - <span class="w3-tag w3-blue w3-round">Current</span>
+            <i class="fa fa-calendar fa-fw w3-margin-right"></i>Feb 2015 - Dec 2018
           </h6>
           <p>
             Prototyped, designed and implemented custom protocols using standard security technologies for
             Axon's body worn cameras. These protocols enabled wireless mobile applications on iOS, Android
             and Windows Phone as well as wired desktop applications on Windows, Linux and MacOS to communicate
             with Axon's cameras.
-          </p><p>
+          </p>
+          <p>
             Ported wireless software applications using Bluetooth and WiFi from virtualized Linux to µITRON
             for improved performance for various wireless features of Axon Body cameras. This also improved
             overall camera performance since virtualized Linux environment could then be removed.
-          </p><p>
+          </p>
+          <p>
             Managed development environment including branching structure, versioning, and continious integration
             system for builds, automated tests and software releases. Developed python tooling for interaction
             with our cameras, outputs of our cameras, continious integration server, data indexer and backend log storage.
@@ -248,7 +313,8 @@ html,body,h1,h2,h3,h4,h5,h6 {
             Windows 8.1. Worked through issues with various Bluetooth protocol layers including HCI, L2CAP, GATT,
             SDP, RFCOMM, OBEX, OPP, AVCTP, AVRCP, AVDTP, A2DP, HFP, and MAP. Worked on compatibility with various popular
             Bluetooth devices including car systems, wearables and headsets.
-          </p><p>
+          </p>
+          <p>
             Developed an engineering tool to view HCI traces in "real-time" and feed them into decoding software
             such as Frontline Protocol Analysis System. Also developed a framework to imitate Bluetooth device behaviour
             to reproduce bugs and simulate edge cases.
@@ -278,7 +344,8 @@ html,body,h1,h2,h3,h4,h5,h6 {
             Essentially created my own role extending from my earlier internship as a Bluetooth tools developer.
             I developed a system for cataloging Bluetooth devices based on features that were scanned programmatically
             using a C++ application.
-          </p><p>
+          </p>
+          <p>
             Automated Bluetooth Certification testing through extending an existing framework that already existed at
             the company to automate user actions on a BlackBerry device. Controlled the execution of certification tests
             through calling a COM Interface exposed by the Bluetooth Profile Tunning Suite. Previous to this, there was
