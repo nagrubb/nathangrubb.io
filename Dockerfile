@@ -4,6 +4,12 @@ MAINTAINER Nathan Grubb
 RUN apt update -y && apt upgrade -y
 RUN apt install -y systemd python3 python3-pip nginx
 RUN apt install -y lsb-core vim
+RUN apt install -y software-properties-common python-software-properties
+
+RUN add-apt-repository ppa:certbot/certbot
+RUN apt update -y
+RUN apt install -y python-certbot-nginx
+
 RUN pip3 install uwsgi flask stravalib alpha-vantage toml
 
 COPY init.d/uwsgi /etc/init.d/
