@@ -26,3 +26,5 @@ COPY --chown=webuser stock /home/webuser/stock
 
 USER root
 ENTRYPOINT service nginx start && service uwsgi start && bash
+
+EXPOSE 80/tcp

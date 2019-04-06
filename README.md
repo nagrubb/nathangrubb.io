@@ -13,24 +13,17 @@ cp cycle/cycle.toml.default cycle/cycle.toml
 vi cycle.toml #configure as needed
 ```
 
-# Step 3: Add public key infrastructure for TLS
-```
-cp <cert> nginx/pki
-cp <private-key> nginx/pki
-cp <dhparams> nginx/pki
-```
-
-# Step 4: Create Container
+# Step 3: Create Container
 ```
 docker build -t website .
 ```
 
-# Step 5: Run Container
+# Step 4: Run Container
 ```
-docker run -p 80:80 -p 443:443 -ti website
+docker run -p <host_port>:80 -t website
 ```
 
-# Step 6: Test
+# Step 5: Test
 ```
 curl <ip-address>
 ```
