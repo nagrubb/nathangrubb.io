@@ -289,12 +289,40 @@
     });
   }
 
+  function createJobHeader(id, title, company, location, companyUrl, logo, duration) {
+    var selector = `[id=${id}]`;
+    var content =
+      `<h5 class="w3-opacity">
+        <div class="w3-hide-small w3-hide-medium">
+          <b>${title} / <a href="${companyUrl}">${company}</a></b>
+          <img src="images/${logo}" class="w3-margin-left" style="width:20px"/>
+        </div>
+        <div class="w3-hide-large">
+          <b>${title}</b>
+          <div></div>
+          <b><a href="${companyUrl}">${company}</a></b>
+          <div></div>
+        </div>
+      </h5>
+      <h6 class="w3-text-grey w3-hide-small w3-hide-medium">
+        <i class="w3-text-blue fa fa-calendar fa-fw w3-margin-right"></i>${duration}
+        <i class="w3-right w3-text-blue fa fa-map fa-fw w3-margin-left"></i>
+        <span class="w3-right">${location}</span>
+      </h6>
+      <h6 class="w3-text-grey w3-hide-large">
+        <div><i class="w3-text-blue fa fa-map fa-fw w3-margin-right"></i>${location}</div>
+        <div><i class="w3-text-blue fa fa-calendar fa-fw w3-margin-right"></i>${duration}</div>
+      </h6>`;
+    body=$(selector).html();
+    $(selector).html(content + body);
+  }
+
   function fetchStockPrice(quote) {
     var url = `stock/${quote}`;
     var selector = `[id=${quote}]`;
 
     var fillFunction = function(selector, price) {
-      var content = `<i class="w3-text-black w3-margin-left fa fa-line-chart fa-fw"></i><b class="w3-margin-left">${price}</b>`
+      var content = `<i class="w3-text-black w3-margin-left"></i><b class="w3-margin-left">${price}</b>`
       $(selector).html(content);
     }
 
@@ -305,7 +333,7 @@
         fillFunction(selector, `$${result.closing_price}`);
       },
       error: function() {
-        fillFunction(selector, "N/A");
+        fillFunction(selector, "");
       }
     });
   }
@@ -316,11 +344,68 @@
           terminal.echo('you type command "' + command + '"');
       });
 
+      createJobHeader(
+        'job-axon-manager',
+        'Software Engineering Manager',
+        'Axon',
+        'HCMC, Vietnam',
+        'https:///www.axon.com',
+        'axon.png',
+        'May 2019 - <span class="w3-tag w3-blue w3-round">Current</span>'
+      );
+
+      createJobHeader(
+        'job-axon-staff',
+        'Staff Software Engineer',
+        'Axon',
+        'Seattle, WA, USA',
+        'https:///www.axon.com',
+        'axon.png',
+        'Jan 2019 - May 2019'
+      );
+
+      createJobHeader(
+        'job-axon-senior',
+        'Senior Software Engineer',
+        'Axon',
+        'Seattle, WA, USA',
+        'https:///www.axon.com',
+        'axon.png',
+        'Feb 2015 - Dec 2018'
+      );
+
+      createJobHeader(
+        'job-msft-II',
+        'Software Engineer II',
+        'Microsoft',
+        'Redmond, WA, USA',
+        'https://www.microsoft.com',
+        'msft.png',
+        'Jan 2012 - Feb 2015'
+      );
+
+      createJobHeader(
+        'job-bbry-junior',
+        'Software Engineer',
+        'BlackBerry',
+        'Wateroo, ON, Canada',
+        'https://www.blackberry.com',
+        'bbry.png',
+        'Jun 2010 - Jan 2012'
+      );
+
+      createJobHeader(
+        'job-bbry-intern',
+        'Software Engineer Intern',
+        'BlackBerry',
+        'Wateroo, ON, Canada',
+        'https://www.blackberry.com',
+        'bbry.png',
+        'Apr 2008 - Aug 2009'
+      );
+
       //kick off some AJAX calls to fill in some dynamic data
       fetchCyclingGoalData();
-      fetchStockPrice("aaxn");
-      fetchStockPrice("msft");
-      fetchStockPrice("bb");
 
       $.getJSON('json/visited_countries.geo.json', function(data) {
         createMap('map', data);
