@@ -7,23 +7,16 @@ git clone <this-repo>
 
 # Step 2: Configure
 ```
-cp stock/stock.toml.default stock/stock.toml
-vi stock.toml #configure as needed
-cp cycle/cycle.toml.default cycle/cycle.toml
-vi cycle.toml #configure as needed
+echo -n "<api_key>" > alpha_advantage_api_key.txt
+echo -n "<access_token>" > strava_access_token.txt
 ```
 
-# Step 3: Create Container
+# Step 3: Create Containers
 ```
-docker build -t website .
-```
-
-# Step 4: Run Container
-```
-docker run -p <host_port>:80 -t website
+docker-compose up --build
 ```
 
-# Step 5: Test
+# Step 4: Test
 ```
 curl <ip-address>
 ```
