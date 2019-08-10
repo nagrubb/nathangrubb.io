@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 services:
   web:
     image: silentsnowman/resume-website:${TAG}
@@ -42,5 +42,3 @@ secrets:
      file: strava_access_token.txt
    alpha_vantage_api_key:
      file: alpha_vantage_api_key.txt
-volumes:
-  jenkins_home:
