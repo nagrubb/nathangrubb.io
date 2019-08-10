@@ -1,2 +1,0 @@
-Flask==0.10.1
-alpha-vantage==2.1.0

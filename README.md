@@ -13,7 +13,7 @@ echo -n "<access_token>" > strava_access_token.txt
 
 # Step 3: Create Containers
 ```
-docker-compose up --build
+TAG=staging PORT=80 docker-compose up -d
 ```
 
 # Step 4: Test
