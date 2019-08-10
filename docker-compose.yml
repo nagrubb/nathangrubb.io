@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  web:
+    image: nginx:latest
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./web/html:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+  cycle:
+    build: cycle/.
+    secrets:
+      - strava_access_token
+    environment:
+      - STRAVA_ACCESS_TOKEN_FILE=/run/secrets/strava_access_token
+      - YEAR_GOAL=900
+  stock:
+    build: stock/.
+    secrets:
+      - alpha_vantage_api_key
+    environment:
+      - ALPHA_VANTAGE_API_KEY_FILE=/run/secrets/alpha_vantage_api_key
+secrets:
+   strava_access_token:
+     file: strava_access_token.txt
+   alpha_vantage_api_key:
+     file: alpha_vantage_api_key.txt
+
+volumes:
+  jenkins_home:
