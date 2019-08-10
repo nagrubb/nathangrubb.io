@@ -9,6 +9,7 @@ services:
       - stock
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
   cycle:
     image: silentsnowman/cycle-service:${TAG}
     secrets:
@@ -18,6 +19,7 @@ services:
       - YEAR_GOAL=900
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
   stock:
     image: silentsnowman/stock-service:${TAG}
     secrets:
@@ -26,6 +28,7 @@ services:
       - ALPHA_VANTAGE_API_KEY_FILE=/run/secrets/alpha_vantage_api_key
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
   watchtower:
     image: containrrr/watchtower
     volumes:
@@ -33,6 +36,7 @@ services:
     command: --label-enable
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
 secrets:
    strava_access_token:
      file: strava_access_token.txt
