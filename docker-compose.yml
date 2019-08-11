@@ -29,6 +29,15 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
+  currency:
+    image: silentsnowman/currency-service:${TAG}
+    secrets:
+      - free_currconv_api_key
+    environment:
+      - FREE_CURRCONV_API_KEY_FILE=/run/secrets/free_currconv_api_key
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
   watchtower:
     image: containrrr/watchtower
     volumes:
@@ -38,7 +47,9 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 secrets:
-   strava_access_token:
-     file: strava_access_token.txt
-   alpha_vantage_api_key:
-     file: alpha_vantage_api_key.txt
+  strava_access_token:
+    file: strava_access_token.txt
+  alpha_vantage_api_key:
+    file: alpha_vantage_api_key.txt
+  free_currconv_api_key:
+    file: free_currconv_api_key.txt

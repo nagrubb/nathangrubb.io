@@ -1,3 +1,4 @@
 *.DS_Store
 strava_access_token.txt
 alpha_vantage_api_key.txt
+free_currconv_api_key.txt
