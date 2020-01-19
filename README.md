@@ -5,7 +5,9 @@ This is obviously overkill for a personal website, but I've used it as an opport
 ```
 git clone <this-repo>
 echo -n "<api_key>" > alpha_advantage_api_key.txt
-echo -n "<access_token>" > strava_access_token.txt
+echo -n <strava_client_id> > strava_client_id.txt
+echo -n <strava_client_secret> > strava_client_secret.txt
+echo -n <strava_refresh_token> > strava_refresh_token.txt
 ```
 
 ## Step 2: Deploy
@@ -21,9 +23,9 @@ sudo PORT=80 TAG=latest docker stack deploy -c docker-compose.yml nathangrubb
 
 ## Step 3: Test
 ```
-curl <ip-address>
-curl <ip-address>/cycle
-curl <ip-address>/stock/msft
+curl -v <ip-address>
+curl -v <ip-address>/api/v1/cycle
+curl -v <ip-address>/api/v1/stock/msft
 ```
 
 ## Other Docker Swarm Commands
