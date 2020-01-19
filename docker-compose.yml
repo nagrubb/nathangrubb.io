@@ -14,9 +14,13 @@ services:
   cycle:
     image: silentsnowman/cycle-service:${TAG}
     secrets:
-      - strava_access_token
+      - strava_client_id
+      - strava_client_secret
+      - strava_refresh_token
     environment:
-      - STRAVA_ACCESS_TOKEN_FILE=/run/secrets/strava_access_token
+      - STRAVA_CLIENT_ID_FILE=/run/secrets/strava_client_id
+      - STRAVA_CLIENT_SECRET_FILE=/run/secrets/strava_client_secret
+      - STRAVA_REFRESH_TOKEN_FILE=/run/secrets/strava_refresh_token
       - YEAR_GOAL=900
     labels:
       com.centurylinklabs.watchtower.enable: "true"
@@ -48,8 +52,12 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 secrets:
-  strava_access_token:
-    file: strava_access_token.txt
+  strava_client_id:
+    file: strava_client_id.txt
+  strava_client_secret:
+    file: strava_client_secret.txt
+  strava_refresh_token:
+    file: strava_refresh_token.txt
   alpha_vantage_api_key:
     file: alpha_vantage_api_key.txt
   free_currconv_api_key:
