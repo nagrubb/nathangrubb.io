@@ -40,10 +40,17 @@ services:
       - free_currconv_api_key
     environment:
       - FREE_CURRCONV_API_KEY_FILE=/run/secrets/free_currconv_api_key
+      - REDIS_SERVER_AND_PORT=redis:6379
+      - REDIS_CACHE_DURATION_IN_MINUTES=60
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
-  watchtower:
+redis:
+    image: redis:6.0.9
+    restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+watchtower:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
