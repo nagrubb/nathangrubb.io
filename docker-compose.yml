@@ -45,12 +45,12 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
-redis:
+  redis:
     image: redis:6.0.9
     restart: unless-stopped
     labels:
       com.centurylinklabs.watchtower.enable: "false"
-watchtower:
+  watchtower:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
