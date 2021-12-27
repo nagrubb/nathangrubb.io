@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
-git checkout staging
-PORT=8000 TAG=staging /usr/local/bin/docker-compose -p staging.nathangrubb.io up -d --force-recreate
+
+SCRIPT_DIR=$(dirname "$0")
+. ${SCRIPT_DIR}/vars.sh
+git -C ${SCRIPT_DIR} checkout ${STAGING_BRANCH}
+PORT=${STAGING_DOCKER_PORT} TAG=${STAGING_DOCKER_TAG} /usr/local/bin/docker-compose -p ${STAGING_DOMAIN_NAME} up -d --force-recreate

@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
-git checkout master
-PORT=9000 TAG=latest /usr/local/bin/docker-compose -p nathangrubb.io up -d --force-recreate
+
+SCRIPT_DIR=$(dirname "$0")
+. ${SCRIPT_DIR}/vars.sh
+git -C ${SCRIPT_DIR} checkout ${PROD_BRANCH}
+PORT=${PROD_DOCKER_PORT} TAG=${PROD_DOCKER_TAG} /usr/local/bin/docker-compose -p ${PROD_DOMAIN_NAME} up -d --force-recreate

@@ -1,5 +1,10 @@
-export DOMAIN_NAME=nathangrubb.io
-export DOCKER_PORT=9000
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$(dirname "$0")
+. ${SCRIPT_DIR}/vars.sh
+export DOMAIN_NAME=${PROD_DOMAIN_NAME}
+export DOCKER_PORT=${PROD_DOCKER_PORT}
+
 cat nginx_template.tmp | envsubst | sudo tee /etc/nginx/conf.d/${DOMAIN_NAME}.conf
 sudo chgrp nginx /etc/nginx/conf.d/${DOMAIN_NAME}.conf
 sudo systemctl reload nginx
