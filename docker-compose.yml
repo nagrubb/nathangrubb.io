@@ -3,7 +3,7 @@ services:
   web:
     image: silentsnowman/resume-website:${TAG}
     ports:
-      - "${PORT}:80"
+      - "127.0.0.1:${PORT}:80"
     depends_on:
       - cycle
       - stock
