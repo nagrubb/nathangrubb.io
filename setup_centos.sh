@@ -26,9 +26,3 @@ sudo firewall-cmd --reload
 # echo -n $key > strava_client_id.txt
 # echo -n $key > strava_client_secret.txt
 # echo -n $key > strava_refresh_token.txt 
-
-export DOMAIN_NAME=staging.nathangrubb.io
-export DOCKER_PORT=8000
-cat nginx_template.tmp | envsubst | sudo tee /etc/nginx/conf.d/${DOMAIN_NAME}.conf
-sudo chgrp nginx /etc/nginx/conf.d/${DOMAIN_NAME}.conf
-sudo certbot --nginx -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}
