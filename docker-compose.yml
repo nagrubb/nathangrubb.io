@@ -21,7 +21,7 @@ services:
       - STRAVA_CLIENT_ID_FILE=/run/secrets/strava_client_id
       - STRAVA_CLIENT_SECRET_FILE=/run/secrets/strava_client_secret
       - STRAVA_REFRESH_TOKEN_FILE=/run/secrets/strava_refresh_token
-      - YEAR_GOAL=900
+      - YEAR_GOAL=1000
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
@@ -57,7 +57,7 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --label-enable --interval 1800 
+    command: --label-enable --interval 1800
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
